@@ -1,0 +1,11 @@
+@import '../../../../styles/base/all';
+
+.upgrade-schema {
+  textarea {
+    border: 1px solid $color-gray-lighter;
+    height: 480px;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    resize: none;
+  }
+}

@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import {
   ToolsComponent,
-  SchemaValidatorComponent
+  SchemaValidatorComponent,
+  UpgradeSchemaComponent
 } from '../../utils/app-components';
 
 export const TOOLS_ROUTES: Routes = [
@@ -13,6 +14,10 @@ export const TOOLS_ROUTES: Routes = [
       {
         path: 'schema-validator',
         component: SchemaValidatorComponent
+      },
+      {
+        path: 'upgrade-schema',
+        component: UpgradeSchemaComponent
       }
     ]
   }

@@ -1,0 +1,23 @@
+<div class="upgrade-schema block block--white">
+  <h2>Code.json Upgrader</h2>
+
+  <p>Please enter your version 1.0.1 code.json file below in order to upgrade it to 2.0.0.</p>
+
+  <div class="upgrade-schema__tool">
+    <div class="usa-grid">
+      <section class="upgrade-schema__before l-block--small usa-width-one-half">
+        <header>
+          <h3>Code.json v1.0.1</h3>
+        </header>
+        <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea>
+      </section>
+
+      <section class="upgrade-schema__after l-block--small usa-width-one-half">
+        <header>
+          <h3>Code.json v2.0.0</h3>
+        </header>
+        <textarea [ngModel]="upgradedCodeJson"></textarea>
+      </section>
+    </div>
+  </div>
+</div>

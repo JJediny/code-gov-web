@@ -48,7 +48,8 @@ import {
   SidebarComponent,
   SubnavComponent,
   ToolsComponent,
-  SchemaValidatorComponent
+  SchemaValidatorComponent,
+  UpgradeSchemaComponent
 } from './app-components.util';
 
 export const APP_COMPONENTS = [
@@ -101,5 +102,6 @@ export const APP_COMPONENTS = [
   SidebarComponent,
   SubnavComponent,
   ToolsComponent,
-  SchemaValidatorComponent
+  SchemaValidatorComponent,
+  UpgradeSchemaComponent
 ];

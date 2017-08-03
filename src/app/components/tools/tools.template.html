@@ -7,9 +7,14 @@
         <li>
           <a toggle-menu routerLink="/tools/schema-validator" routerLinkActive="usa-current">Schema Validator</a>
         </li>
+        <li>
+          <a toggle-menu routerLink="/tools/upgrade-schema" routerLinkActive="usa-current">Upgrade Schema</a>
+        </li>
       </sidebar-content>
     </sidebar>
 
-    <router-outlet></router-outlet>
+    <div class="tool">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
