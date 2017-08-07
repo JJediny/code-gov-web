@@ -8,11 +8,22 @@
       <header>
         <h3>Code.json</h3>
       </header>
-      <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea>
-      <div id="codeJsonInput" style="width:800px;height:600px;border:1px solid grey"></div>
-      <div id="messages">
-        <ul>
-          <li *ngFor="let error of errors"><a (click)="scrollToError(error)">{{error.options.hoverMessage[0].value}}</a></li>
+      <monaco-editor
+          [text]="codeJson"
+          (onDidChangeModelDecorations)="onDidChangeModelDecorations($event)"
+          (onDidCreateEditor)="onDidCreateEditor($event)"
+          (onDidCreateModel)="onDidCreateModel($event)"
+          (onDidChangeModel)="onDidChangeModel($event)">
+      </monaco-editor>
+      <div id="messages" style="height:185px;overflow:scroll;">
+        <h4>Problems</h4>
+        <p *ngIf="errors.length === 0">
+          No errors found!
+        </p>
+        <ul *ngIf="errors.length > 0">
+          <li *ngFor="let error of errors">
+            <a simplePageScroll href="#codeJsonInput" (click)="scrollToError(error)">{{error.options.hoverMessage[0].value}} <span class="error__line-number">({{error.startMarker.position.lineNumber}}, {{error.startMarker.position.column}})</span></a>
+          </li>
         </ul>
       </div>
     </section>

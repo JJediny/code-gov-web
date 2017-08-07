@@ -52,3 +52,5 @@ export * from '../../components/policy-guide/policy/policy-appendix';
 export * from '../../components/tools';
 export * from '../../components/tools/schema-validator';
 export * from '../../components/tools/upgrade-schema';
+
+export * from '../../components/monaco-editor';

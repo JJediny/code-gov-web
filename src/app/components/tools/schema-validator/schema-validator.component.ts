@@ -1,26 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-// const monaco = require('monaco-editor/min/vs/editor/editor.main');
-const Ajv = require('ajv');
-const ajv = new Ajv({ format: 'full', allErrors: true, verbose: true });
-
-ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-04.json'));
-ajv.addSchema(require('../../../schemas/2.0.0.json'), '2.0.0');
-
-function initAfterMonaco(resolve?: Function, reject?: Function): Promise<any> {
-  if (!resolve || !reject) {
-    return new Promise<void>(function (resolve, reject) {
-      return initAfterMonaco(resolve, reject);
-    });
-  } else {
-    if ((<any>window).monaco) {
-      resolve((<any>window).monaco);
-    } else {
-      setTimeout(function () {
-        return initAfterMonaco(resolve, reject);
-      }, 0);
-    }
-  }
-}
+import { MonacoEditorService } from '../../monaco-editor';
+const _ = require('lodash');
 
 @Component({
   selector: 'schema-validator',
@@ -29,68 +9,47 @@ function initAfterMonaco(resolve?: Function, reject?: Function): Promise<any> {
 })
 
 export class SchemaValidatorComponent {
-  private codeJson: string = '';
-  private errors: Array<Object> = null;
+  private errors: Array<Object> = [];
+  private codeJson = JSON.stringify(require('./1.0.1-example.json'), null, '\t');
+  private monaco: any;
   private model: any;
   private editor: any;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-  setCodeJson(value) {
-    this.codeJson = value;
-
-    try {
-      ajv.validate('2.0.0', JSON.parse(value));
-
-      this.errors = ajv.errors;
-    } catch(e) {
-      this.errors = [{
-        keyword: '',
-        message: 'Code.json is invalid JSON.'
-      }];
-    }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private monacoEditor: MonacoEditorService
+  ) {
+    monacoEditor.addSchema(['*-2.0.0.json'], require('../../../schemas/2.0.0.json'));
   }
 
-  ngAfterViewInit() {
-    initAfterMonaco().then((monaco) => {
-      monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-        validate: true,
-        schemas: [{
-          fileMatch: ['foo.json'],
-          schema: require('../../../schemas/2.0.0.json')
-        }]
-      });
-
-      const jsonCode = require('./1.0.1-example.json');
-
-      const model = monaco.editor.createModel(JSON.stringify(jsonCode, null, '\t'), 'json', 'internal://server/foo.json');
-      (<any>window).model = model;
-
-      const editor = monaco.editor.create(document.getElementById('codeJsonInput'), {
-        model: model
-      });
-      (<any>window).editor = editor;
-      this.editor = editor;
-
-      this.model = model;
-
-      model.onDidChangeDecorations(() => {
-        this.errors = this.model.getAllDecorations().filter(decoration => Array.isArray(decoration.options.hoverMessage));
-        this.changeDetectorRef.detectChanges();
-      });
-    });
+  onDidCreateEditor(editor) {
+    this.editor = editor;
   }
 
-  getErrors() {
-    if (this.model) {
-      return this.model.getAllDecorations().filter(decoration => Array.isArray(decoration.options.hoverMessage));
-    } else {
-      return [];
-    }
+  onDidCreateModel(model) {
+    this.model = model;
+  }
+
+  onDidChangeModel(event) {
+
+  }
+
+  onDidChangeModelDecorations(event) {
+    const errors = this.errors = this.model.getAllDecorations().filter(decoration => decoration.isForValidation);
+    this.changeDetectorRef.detectChanges();
   }
 
   scrollToError(error) {
-    this.editor.revealLine(error.startMarker.position.lineNumber);
+    const { startMarker, endMarker } = error;
+    const range = new this.monaco.Range(
+      startMarker.position.lineNumber,
+      startMarker.position.column,
+      endMarker.position.lineNumber,
+      endMarker.position.column,
+    );
+    this.editor.revealRange(range);
+    this.editor.setPosition(startMarker.position);
+    this.editor.focus();
   }
 
   hasInput() {

@@ -5,18 +5,20 @@
 
   <div class="upgrade-schema__tool">
     <div class="usa-grid">
-      <section class="upgrade-schema__before l-block--small usa-width-one-half">
+      <section class="upgrade-schema__before l-block--small usa-width-one-whole">
         <header>
           <h3>Code.json v1.0.1</h3>
         </header>
-        <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea>
+        <monaco-editor></monaco-editor>
+        <!-- <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea> -->
       </section>
 
-      <section class="upgrade-schema__after l-block--small usa-width-one-half">
+      <section class="upgrade-schema__after l-block--small usa-width-one-whole">
         <header>
           <h3>Code.json v2.0.0</h3>
         </header>
-        <textarea [ngModel]="upgradedCodeJson"></textarea>
+        <monaco-editor></monaco-editor>
+        <!-- <textarea [ngModel]="upgradedCodeJson"></textarea> -->
       </section>
     </div>
   </div>

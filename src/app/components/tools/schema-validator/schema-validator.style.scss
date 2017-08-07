@@ -29,6 +29,16 @@
       }
     }
   }
+
+  ul {
+    font-weight: 500;
+    list-style: none;
+    padding-top: 1rem;
+  }
+
+  .error__line-number {
+    color: $color-gray;
+  }
 }
 
 .schema-validator__input {
@@ -41,14 +51,6 @@
 
   h3 {
     margin: 0;
-  }
-
-  textarea {
-    border: none;
-    height: 480px;
-    margin-bottom: 1rem;
-    max-width: 100%;
-    resize: none;
   }
 }
 

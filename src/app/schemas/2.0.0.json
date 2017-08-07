@@ -194,8 +194,8 @@
           "tags",
           "contact",
           "date"
-
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -203,5 +203,6 @@
     "version",
     "agency",
     "releases"
-  ]
+  ],
+  "additionalProperties": false
 }
