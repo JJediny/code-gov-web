@@ -18,6 +18,7 @@ export class MonacoEditorComponent {
   @Output() private onDidChangeModel = new EventEmitter<any>();
   @Output() private onDidCreateModel = new EventEmitter<any>();
   @Output() private onDidCreateEditor = new EventEmitter<any>();
+  @Output() private onDidChangeModelContent = new EventEmitter<any>();
   // @Output() private editor: any;
 
   constructor(private monacoEditor: MonacoEditorService) {}
@@ -61,8 +62,8 @@ export class MonacoEditorComponent {
       });
 
       this.editor.onDidChangeModel(e => this.onDidChangeModel.emit(e));
-
       this.editor.onDidChangeModelDecorations(e => this.onDidChangeModelDecorations.emit(e));
+      this.editor.onDidChangeModelContent(e => this.onDidChangeModelContent.emit(e));
     });
   }
 

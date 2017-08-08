@@ -9,7 +9,11 @@
         <header>
           <h3>Code.json v1.0.1</h3>
         </header>
-        <monaco-editor></monaco-editor>
+        <monaco-editor
+            fileName="before-2.0.0.json"
+            (onDidCreateEditor)="onDidCreateBeforeEditor($event)"
+            (onDidChangeModelContent)="upgradeContent($event)">
+        </monaco-editor>
         <!-- <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea> -->
       </section>
 
@@ -17,7 +21,10 @@
         <header>
           <h3>Code.json v2.0.0</h3>
         </header>
-        <monaco-editor></monaco-editor>
+        <monaco-editor
+            (onDidCreateEditor)="onDidCreateAfterEditor($event)"
+            fileName="after-2.0.0.json">
+        </monaco-editor>
         <!-- <textarea [ngModel]="upgradedCodeJson"></textarea> -->
       </section>
     </div>

@@ -10,6 +10,8 @@ import _ from 'lodash';
 export class UpgradeSchemaComponent {
   private codeJson: string = '';
   private upgradedCodeJson: string = '';
+  private beforeEditor: any;
+  private afterEditor: any;
 
   setCodeJson(value) {
     this.codeJson = value;
@@ -74,5 +76,18 @@ export class UpgradeSchemaComponent {
     delete upgradedCodeJson.projects;
 
     this.upgradedCodeJson = JSON.stringify(upgradedCodeJson, null, '\t');
+  }
+
+  onDidCreateBeforeEditor(editor) {
+    this.beforeEditor = editor;
+  }
+
+  onDidCreateAfterEditor(editor) {
+    this.afterEditor = editor;
+  }
+
+  upgradeContent(e) {
+    this.afterEditor.setValue(this.beforeEditor.getValue());
+    debugger;
   }
 }
