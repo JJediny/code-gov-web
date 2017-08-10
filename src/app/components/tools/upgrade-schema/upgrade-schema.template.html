@@ -6,13 +6,22 @@
   <div class="upgrade-schema__tool">
     <div class="usa-grid">
       <section class="upgrade-schema__before l-block--small usa-width-one-whole">
-        <header>
-          <h3>Code.json v1.0.1</h3>
+        <header class="usa-grid">
+          <div>
+            <div class="usa-width-two-thirds">
+              <h3>Code.json v1.0.1</h3>
+            </div>
+            <div class="usa-width-one-third">
+              <form>
+                <button class="usa-button usa-button-small" (click)="upgradeContent()">Upgrade</button>
+              </form>
+            </div>
+          </div>
         </header>
         <monaco-editor
-            fileName="before-2.0.0.json"
-            (onDidCreateEditor)="onDidCreateBeforeEditor($event)"
-            (onDidChangeModelContent)="upgradeContent($event)">
+            fileName="before-1.0.1.json"
+            [text]="beforeText"
+            [(editor)]="beforeEditor">
         </monaco-editor>
         <!-- <textarea [ngModel]="codeJson" (ngModelChange)="setCodeJson($event)"></textarea> -->
       </section>
@@ -22,9 +31,17 @@
           <h3>Code.json v2.0.0</h3>
         </header>
         <monaco-editor
-            (onDidCreateEditor)="onDidCreateAfterEditor($event)"
-            fileName="after-2.0.0.json">
+            [(editor)]="afterEditor"
+            fileName="after-2.0.0.json"
+            [(editor)]="afterEditor"
+            [(model)]="afterModel"
+            [(monaco)]="monaco">
         </monaco-editor>
+        <monaco-validator
+            [editor]="afterEditor"
+            [model]="afterModel"
+            [monaco]="monaco">
+        </monaco-validator>
         <!-- <textarea [ngModel]="upgradedCodeJson"></textarea> -->
       </section>
     </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import _ from 'lodash';
+import { clone } from 'lodash';
+import { MonacoEditorService } from '../../monaco-editor';
 
 @Component({
   selector: 'upgrade-schema',
@@ -8,15 +9,19 @@ import _ from 'lodash';
 })
 
 export class UpgradeSchemaComponent {
-  private codeJson: string = '';
-  private upgradedCodeJson: string = '';
+  private monaco: any;
   private beforeEditor: any;
+  private beforeText = JSON.stringify(require('../schema-validator/1.0.1-example.json'), null, '\t');
   private afterEditor: any;
+  private afterModel: any;
 
-  setCodeJson(value) {
-    this.codeJson = value;
+  constructor(private monacoEditor: MonacoEditorService) {
+    monacoEditor.addSchema('1.0.1.json', ['-1.0.1.json'], require('../../../schemas/1.0.1.json'));
+    monacoEditor.addSchema('2.0.0.json', ['-2.0.0.json'], require('../../../schemas/2.0.0.json'));
+  }
 
-    const upgradedCodeJson = JSON.parse(value);
+  transformCodeJson(value) {
+    const upgradedCodeJson = value;
 
     upgradedCodeJson.version = '2.0.0';
 
@@ -75,7 +80,7 @@ export class UpgradeSchemaComponent {
     });
     delete upgradedCodeJson.projects;
 
-    this.upgradedCodeJson = JSON.stringify(upgradedCodeJson, null, '\t');
+    return upgradedCodeJson;
   }
 
   onDidCreateBeforeEditor(editor) {
@@ -87,7 +92,12 @@ export class UpgradeSchemaComponent {
   }
 
   upgradeContent(e) {
-    this.afterEditor.setValue(this.beforeEditor.getValue());
-    debugger;
+    try {
+      const parsedCodeJson = JSON.parse(this.beforeEditor.getValue());
+
+      this.afterEditor.setValue(JSON.stringify(this.transformCodeJson(clone(parsedCodeJson)), null, '\t'));
+    } catch (e) {
+
+    }
   }
 }

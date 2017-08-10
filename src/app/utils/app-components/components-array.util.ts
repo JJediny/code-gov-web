@@ -50,7 +50,8 @@ import {
   ToolsComponent,
   SchemaValidatorComponent,
   UpgradeSchemaComponent,
-  MonacoEditorComponent
+  MonacoEditorComponent,
+  MonacoValidatorComponent
 } from './app-components.util';
 
 export const APP_COMPONENTS = [
@@ -105,5 +106,6 @@ export const APP_COMPONENTS = [
   ToolsComponent,
   SchemaValidatorComponent,
   UpgradeSchemaComponent,
-  MonacoEditorComponent
+  MonacoEditorComponent,
+  MonacoValidatorComponent
 ];

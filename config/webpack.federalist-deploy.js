@@ -31,34 +31,34 @@ if (helpers.hasProcessFlag('github-stag')) {
   GIT_BRANCH_NAME = 'federalist-stag';
   BASEURL = '/preview/presidential-innovation-fellows/code-gov-web/'+GIT_BRANCH_NAME+'/';
   gtmAuth = 'GTM-M9L9Q5';
-  
+
 } else if (helpers.hasProcessFlag('federalist-dev')){
-  
+
   GIT_BRANCH_NAME = 'federalist-dev';
   BASEURL = '/preview/presidential-innovation-fellows/code-gov-web/'+GIT_BRANCH_NAME+'/';
   gtmAuth = 'GTM-M9L9Q5';
-  
-  
+
+
 }
 else if (helpers.hasProcessFlag('dashboard-preview')){
   GIT_BRANCH_NAME = 'federalist-dashboard-preview';
   BASEURL = '/preview/presidential-innovation-fellows/code-gov-web/'+GIT_BRANCH_NAME+'/';
   gtmAuth = 'GTM-M9L9Q5';
-  
+
 }
 else if (helpers.hasProcessFlag('federalist-prod')){
   GIT_BRANCH_NAME = 'federalist-pages';
   BASEURL = '/';
   gtmAuth = 'GTM-M9L9Q5';
-  
-  
+
+
 }
 
 else {
   GIT_BRANCH_NAME = 'federalist-dev';
   BASEURL = '/preview/presidential-innovation-fellows/code-gov-web/federalist-dev/';
   gtmAuth = 'GTM-M9L9Q5';
-  
+
 }
 
 const METADATA = webpackMerge(webpackConfig.metadata, {
@@ -117,28 +117,28 @@ module.exports = function (env) {
 
       function() {
         this.plugin('done', function() {
-          console.log('Starting deployment to GitHub.');
-
-          const logger = function (msg) {
-            console.log(msg);
-          };
-
-          const options = {
-            logger: logger,
-            branch: GIT_BRANCH_NAME,
-            remote: GIT_REMOTE_NAME,
-            message: COMMIT_MESSAGE,
-            dotfiles: true
-          };
-
-          ghpages.publish(webpackConfig({env: ENV}).output.path, options, function(err) {
-            if (err) {
-              console.log('GitHub deployment done. STATUS: ERROR: '+err);
-              throw err;
-            } else {
-              console.log('GitHub deployment done. STATUS: SUCCESS.');
-            }
-          });
+          // console.log('Starting deployment to GitHub.');
+          //
+          // const logger = function (msg) {
+          //   console.log(msg);
+          // };
+          //
+          // const options = {
+          //   logger: logger,
+          //   branch: GIT_BRANCH_NAME,
+          //   remote: GIT_REMOTE_NAME,
+          //   message: COMMIT_MESSAGE,
+          //   dotfiles: true
+          // };
+          //
+          // ghpages.publish(webpackConfig({env: ENV}).output.path, options, function(err) {
+          //   if (err) {
+          //     console.log('GitHub deployment done. STATUS: ERROR: '+err);
+          //     throw err;
+          //   } else {
+          //     console.log('GitHub deployment done. STATUS: SUCCESS.');
+          //   }
+          // });
         })
       }
     ]

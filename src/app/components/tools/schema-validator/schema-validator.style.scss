@@ -7,38 +7,6 @@
 .schema-validator__tool {
   border: 1px solid $color-gray-lighter;
   border-radius: 8px;
-
-  &.valid {
-    border-color: $color-green-lighter;
-
-    .schema-validator__input {
-      header {
-        background-color: $color-green-lightest;
-        border-color: $color-green-lighter;
-      }
-    }
-  }
-
-  &.invalid {
-    border-color: $color-secondary-light;
-
-    .schema-validator__input {
-      header {
-        background-color: $color-secondary-lightest;
-        border-color: $color-secondary-light;
-      }
-    }
-  }
-
-  ul {
-    font-weight: 500;
-    list-style: none;
-    padding-top: 1rem;
-  }
-
-  .error__line-number {
-    color: $color-gray;
-  }
 }
 
 .schema-validator__input {
@@ -47,43 +15,28 @@
     border-bottom: none;
     border-radius: 8px 8px 0 0;
     padding: 1.5rem;
+
+    h3 {
+      padding-top: 9px;
+      padding-bottom: 9px;
+    }
+
+    form {
+      text-align: end;
+
+      label {
+        margin: 0;
+        margin-right: 1rem;
+      }
+
+      select {
+        display: inline-block;
+        width: 90px;
+      }
+    }
   }
 
   h3 {
     margin: 0;
-  }
-}
-
-.schema-validator__messages {
-  border-top: 1px solid $color-gray-lighter;
-
-  header {
-    padding: 1.5rem;
-
-    h3 {
-      margin: 0;
-    }
-  }
-
-  table {
-    border-radius: 0 0 8px 8px;
-    margin: 0;
-    overflow: hidden;
-
-    th,
-    td {
-      border: none;
-    }
-
-    tr {
-      border-bottom: 1px solid $color-gray-lighter;
-    }
-  }
-
-  p {
-    background-color: $color-gray-lightest;
-    border-radius: 0 0 8px 8px;
-    margin: 0;
-    padding: 1.5rem;
   }
 }

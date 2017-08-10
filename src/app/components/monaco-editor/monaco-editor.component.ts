@@ -8,9 +8,12 @@ import { MonacoEditorService } from './monaco-editor.service';
 })
 
 export class MonacoEditorComponent {
-  private monaco: any;
-  private editor: any;
-  private model: any;
+  @Input() private monaco: any;
+  @Output() private monacoChange = new EventEmitter<any>();
+  @Input() private editor: any;
+  @Output() private editorChange = new EventEmitter<any>();
+  @Input() private model: any;
+  @Output() private modelChange = new EventEmitter<any>();
   @Input() private text: string;
   @Input() private fileName: string;
   @ViewChild('monacoEditor') editorElement: ElementRef;
@@ -42,6 +45,7 @@ export class MonacoEditorComponent {
   ngAfterViewInit() {
     this.initAfterMonaco().then((monaco) => {
       this.monaco = monaco;
+      this.monacoChange.emit(this.monaco);
 
       monaco.editor.onDidCreateModel(e => this.onDidCreateModel.emit(e));
       monaco.editor.onDidCreateEditor(e => this.onDidCreateEditor.emit(e));
@@ -52,6 +56,7 @@ export class MonacoEditorComponent {
       });
 
       this.model = monaco.editor.createModel(this.text, 'json', `inmemory://${this.fileName}`);
+      this.modelChange.emit(this.model);
 
       this.editor = monaco.editor.create(this.editorElement.nativeElement, {
         model: this.model,
@@ -60,6 +65,7 @@ export class MonacoEditorComponent {
         },
         automaticLayout: true
       });
+      this.editorChange.emit(this.editor);
 
       this.editor.onDidChangeModel(e => this.onDidChangeModel.emit(e));
       this.editor.onDidChangeModelDecorations(e => this.onDidChangeModelDecorations.emit(e));

@@ -1,6 +1,24 @@
 @import '../../../../styles/base/all';
 
 .upgrade-schema {
+  header {
+    padding: 1.5rem;
+
+    h3 {
+      margin: 0;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    form {
+      text-align: end;
+
+      button {
+        margin: 8.5px 0;
+      }
+    }
+  }
+
   textarea {
     border: 1px solid $color-gray-lighter;
     height: 480px;

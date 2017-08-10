@@ -6,15 +6,17 @@ import { map } from 'lodash';
 export class MonacoEditorService {
   private schemas = {};
 
-  public addSchema(fileMatch, schema) {
+  public addSchema(uri, fileMatch, schema) {
     this.schemas[fileMatch] = {
+      uri,
       fileMatch,
       schema
     };
   }
 
   public getSchemas() {
-    return map(this.schemas, ({ fileMatch, schema }) => ({
+    return map(this.schemas, ({ uri, fileMatch, schema }) => ({
+      uri,
       fileMatch,
       schema
     }));

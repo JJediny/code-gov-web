@@ -3,29 +3,54 @@
 
   <p>Please enter your code.json file below in order to validate it correctly meets the specification.</p>
 
-  <div class="schema-validator__tool" [ngClass]="{'valid': hasInput() && isValid(), 'invalid': hasInput() && !isValid()}">
+  <div class="schema-validator__tool">
     <section class="schema-validator__input">
-      <header>
-        <h3>Code.json</h3>
+      <header class="usa-grid">
+        <div>
+          <div class="usa-width-one-third">
+            <h3>Code.json</h3>
+          </div>
+          <div class="usa-width-two-thirds">
+            <form>
+              <label for="version">Version</label>
+              <select
+                  id="version"
+                  name="version"
+                  [(ngModel)]="version">
+                <option value="2.0.0">2.0.0</option>
+                <option value="1.0.1">1.0.1</option>
+              </select>
+            </form>
+          </div>
+        </div>
       </header>
-      <monaco-editor
-          [text]="codeJson"
-          fileName="validate-2.0.0.json"
-          (onDidChangeModelDecorations)="onDidChangeModelDecorations($event)"
-          (onDidCreateEditor)="onDidCreateEditor($event)"
-          (onDidCreateModel)="onDidCreateModel($event)"
-          (onDidChangeModel)="onDidChangeModel($event)">
-      </monaco-editor>
-      <div id="messages" style="height:185px;overflow:scroll;">
-        <h4>Problems</h4>
-        <p *ngIf="errors.length === 0">
-          No errors found!
-        </p>
-        <ul *ngIf="errors.length > 0">
-          <li *ngFor="let error of errors">
-            <a simplePageScroll href="#codeJsonInput" (click)="scrollToError(error)">{{error.options.hoverMessage[0].value}} <span class="error__line-number">({{error.startMarker.position.lineNumber}}, {{error.startMarker.position.column}})</span></a>
-          </li>
-        </ul>
+      <div *ngIf="version === '2.0.0'">
+        <monaco-editor
+            [text]="codeJson"
+            fileName="version-2.0.0.json"
+            [(editor)]="editor"
+            [(model)]="model"
+            [(monaco)]="monaco">
+        </monaco-editor>
+        <monaco-validator
+            [editor]="editor"
+            [model]="model"
+            [monaco]="monaco">
+        </monaco-validator>
+      </div>
+      <div *ngIf="version === '1.0.1'">
+        <monaco-editor
+            [text]="codeJson"
+            fileName="version-1.0.1.json"
+            [(editor)]="editor"
+            [(model)]="model"
+            [(monaco)]="monaco">
+        </monaco-editor>
+        <monaco-validator
+            [editor]="editor"
+            [model]="model"
+            [monaco]="monaco">
+        </monaco-validator>
       </div>
     </section>
 
