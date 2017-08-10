@@ -4,6 +4,8 @@ import {
   AgencyComponent,
   AgencySidebarComponent,
   AppComponent,
+  AutocompleteComponent,
+  AutocompleteResultComponent,
   BannerArtComponent,
   CapacityComponent,
   CapacityBasicsComponent,
@@ -45,6 +47,8 @@ import {
   PrivacyPolicyComponent,
   RepoComponent,
   ReposComponent,
+  ReposSearchComponent,
+  SearchResultsComponent,
   SidebarComponent,
   SubnavComponent
 } from './app-components.util';
@@ -55,6 +59,8 @@ export const APP_COMPONENTS = [
   AgencyComponent,
   AgencySidebarComponent,
   AppComponent,
+  AutocompleteComponent,
+  AutocompleteResultComponent,
   BannerArtComponent,
   CapacityComponent,
   CapacityBasicsComponent,
@@ -96,6 +102,8 @@ export const APP_COMPONENTS = [
   PrivacyPolicyComponent,
   RepoComponent,
   ReposComponent,
+  ReposSearchComponent,
+  SearchResultsComponent,
   SidebarComponent,
   SubnavComponent
 ];

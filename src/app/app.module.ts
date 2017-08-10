@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { Angulartics2On } from 'angulartics2';
 import { Angulartics2Module, Angulartics2GoogleTagManager } from 'angulartics2';
 
@@ -33,10 +33,13 @@ import { APP_COMPONENTS } from './utils/app-components';
 import { AgencyService, AGENCIES } from './services/agency';
 import { MobileService } from './services/mobile';
 import { ModalService } from './services/modal';
+import { RepoService } from './services/repo';
 import { ReposService } from './services/repos';
+import { SearchService } from './services/search';
 import { SeoService } from './services/seo';
 import { StateService } from './services/state';
 import { StatusService } from './services/status';
+import { TermService } from './services/term';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -44,10 +47,13 @@ const APP_PROVIDERS = [
   AgencyService,
   MobileService,
   ModalService,
+  RepoService,
   ReposService,
+  SearchService,
   SeoService,
   StateService,
-  StatusService
+  StatusService,
+  TermService
 ];
 
 /**
@@ -60,6 +66,7 @@ const APP_PROVIDERS = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    InfiniteScrollModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
     Ng2PageScrollModule.forRoot(),
     Ng2SimplePageScrollModule.forRoot(),
